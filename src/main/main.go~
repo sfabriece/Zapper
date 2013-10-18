@@ -39,7 +39,7 @@ func message(conn *net.UDPConn, store *ztorage.ViewersList) {
 	}
 	store.StoreZap(*zap)
 
-	fmt.Println(msg)
+	//fmt.Println(msg)
 }
 
 func checkError(err error) {
@@ -65,20 +65,26 @@ func tv2Viewers(store *ztorage.ViewersList){
 
 func top10(store *ztorage.ViewersList){
 	for{
+		fmt.Print("")
 		time.Sleep(time.Second)
-		tl := store.M
+		topList := make(map[string]int)
+		for key, value := range store.M{
+			topList[key] = value
+		}
+		fmt.Println(len(store.M))
 		fmt.Println("\ntop 10:")
 		for i := 0; i < 10; i++{
 			maxKey := ""
 			maxValue := 0
-			for key, value := range tl{
+			for key, value := range topList{
 				if value > maxValue{
 					maxValue = value
 					maxKey = key
 				}
 			}
 			fmt.Println("\t", i + 1, "\t", maxKey, ":  ", maxValue, " viewers")
-			delete(tl, maxKey)
+			delete(topList, maxKey)
 		}
+		fmt.Println(len(store.M))
 	}
 }
