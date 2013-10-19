@@ -14,8 +14,8 @@ func main() {
 	checkError(err)
 	store := ztorage.NewZapStore()
 	//go nrkViewers(store)
-	//go tv2Viewers(store)
-	go top10(store)
+	go tv2Viewers(store)
+	//go top10(store)
 	conn, err := net.ListenMulticastUDP("udp", nil, gaddr)
 	checkError(err)
 	for {		
