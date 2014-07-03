@@ -19,7 +19,7 @@ type ZapError struct {
 	msg string
 }
 func (e *ZapError) Error() string {
-	return e.msg;
+	return e.msg
 }
 func NewZap(msg string) (*Zap, error){
 	if msg == ""{
